@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import Button from './ui/Button';
+import { CONTACT } from '../config/constants';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,16 +13,14 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 60; // Increased from 10 to 60 to account for banner
+      const isScrolled = window.scrollY > 60;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
   useEffect(() => {
@@ -39,9 +38,10 @@ const Header: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 mt-12 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/80 backdrop-blur-sm shadow-md py-2' : 'bg-transparent py-4'
       }`}
+      style={{ marginTop: '48px' }}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Link to="/cart" className="relative">
               <ShoppingCart className="h-6 w-6" />
               {getTotalItems() > 0 && (
@@ -81,14 +81,14 @@ const Header: React.FC = () => {
               variant="gradient-primary" 
               size="sm"
               icon={<Phone className="h-4 w-4" />}
-              onClick={() => window.open('tel:+917728962090')}
+              onClick={() => window.open(`tel:+91${CONTACT.phone.primary}`)}
             >
               Call Now
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center space-x-4 md:hidden">
+          <div className="flex items-center space-x-4 lg:hidden">
             <Link to="/cart" className="relative">
               <ShoppingCart className="h-6 w-6" />
               {getTotalItems() > 0 && (
@@ -113,8 +113,8 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/80 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-2">
+        <div className="lg:hidden bg-white/95 backdrop-blur-sm shadow-lg">
+          <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
@@ -131,9 +131,9 @@ const Header: React.FC = () => {
                 variant="gradient-primary" 
                 fullWidth
                 icon={<Phone className="h-4 w-4" />}
-                onClick={() => window.open('tel:+917728962090')}
+                onClick={() => window.open(`tel:+91${CONTACT.phone.primary}`)}
               >
-                Call Now: 7728962090
+                Call Now: {CONTACT.phone.primary}
               </Button>
             </nav>
           </div>
