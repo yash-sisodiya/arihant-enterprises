@@ -12,6 +12,7 @@ import {
   Battery,
   Sun,
 } from 'lucide-react';
+import { CONTACT, THEME } from '../config/constants';
 
 const Footer: React.FC = () => {
   return (
@@ -19,22 +20,22 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-blue-400">Arihant</span>
-              <span className="text-2xl font-bold text-orange-400">Enterprises</span>
-            </Link>
+            <h2 className="text-2xl font-bold mb-4">
+              <span className="text-blue-400">Arihant</span>
+              <span className="text-orange-400">Enterprises</span>
+            </h2>
             <p className="mb-4">
               Your trusted partner for batteries, inverters, and solar solutions in Rajsamand.
               We provide quality products with exceptional service.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href={CONTACT.social.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href={CONTACT.social.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href={CONTACT.social.youtube} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
@@ -106,23 +107,23 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex">
                 <MapPin className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span>Surabhi Complex ke saamne, Jalchakki Road, Kankroli, Rajsamand (Rajasthan)</span>
+                <span>{CONTACT.address.full}</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
-                <a href="tel:+917728962090" className="hover:text-blue-400">7728962090</a>
+                <a href={`tel:+91${CONTACT.phone.primary}`} className="hover:text-blue-400">{CONTACT.phone.primary}</a>
                 {" / "}
-                <a href="tel:+919784477456" className="hover:text-blue-400">9784477456</a>
+                <a href={`tel:+91${CONTACT.phone.secondary}`} className="hover:text-blue-400">{CONTACT.phone.secondary}</a>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                <a href="mailto:contact@arihantenterprises.in" className="hover:text-blue-400">
-                  contact@arihantenterprises.in
+                <a href={`mailto:${CONTACT.email}`} className="hover:text-blue-400">
+                  {CONTACT.email}
                 </a>
               </li>
               <li className="flex items-center">
                 <Clock className="h-5 w-5 mr-2" />
-                <span>9:00 AM - 8:00 PM (All Days)</span>
+                <span>{CONTACT.workingHours.time} (All Days)</span>
               </li>
             </ul>
           </div>
