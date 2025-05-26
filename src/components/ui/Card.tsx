@@ -3,11 +3,20 @@ import React from 'react';
 interface CardProps {
   className?: string;
   children: React.ReactNode;
+  hover?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ className = '', children }) => {
+const Card: React.FC<CardProps> = ({ className = '', children, hover = false }) => {
   return (
-    <div className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}>
+    <div 
+      className={`
+        bg-white/80 backdrop-blur-sm 
+        border border-gradient-to-r from-blue-500/20 to-purple-500/20
+        rounded-lg shadow-lg
+        ${hover ? 'transition-all duration-300 hover:-translate-y-1 hover:shadow-xl' : ''}
+        ${className}
+      `}
+    >
       {children}
     </div>
   );
@@ -20,7 +29,7 @@ interface CardHeaderProps {
 
 const CardHeader: React.FC<CardHeaderProps> = ({ className = '', children }) => {
   return (
-    <div className={`p-4 border-b ${className}`}>
+    <div className={`p-6 border-b border-gradient-to-r from-blue-500/10 to-purple-500/10 ${className}`}>
       {children}
     </div>
   );
@@ -33,7 +42,7 @@ interface CardTitleProps {
 
 const CardTitle: React.FC<CardTitleProps> = ({ className = '', children }) => {
   return (
-    <h3 className={`text-lg font-semibold ${className}`}>
+    <h3 className={`text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent ${className}`}>
       {children}
     </h3>
   );
@@ -46,7 +55,7 @@ interface CardContentProps {
 
 const CardContent: React.FC<CardContentProps> = ({ className = '', children }) => {
   return (
-    <div className={`p-4 ${className}`}>
+    <div className={`p-6 ${className}`}>
       {children}
     </div>
   );
@@ -59,7 +68,7 @@ interface CardFooterProps {
 
 const CardFooter: React.FC<CardFooterProps> = ({ className = '', children }) => {
   return (
-    <div className={`p-4 border-t ${className}`}>
+    <div className={`p-6 border-t border-gradient-to-r from-blue-500/10 to-purple-500/10 ${className}`}>
       {children}
     </div>
   );
@@ -77,7 +86,7 @@ const CardImage: React.FC<CardImageProps> = ({ src, alt, className = '' }) => {
       <img
         src={src}
         alt={alt}
-        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105 ${className}`}
+        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${className}`}
       />
     </div>
   );

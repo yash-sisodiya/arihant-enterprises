@@ -20,6 +20,18 @@
   }
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -29,7 +41,26 @@
   animation-delay: 2s;
 }
 
+.animate-gradient {
+  animation: gradient 15s ease infinite;
+  background-size: 200% 200%;
+}
+
 /* Gradient border utilities */
 .border-gradient-to-r {
   border-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to)) 1;
+}
+
+/* Glass effect utilities */
+.glass {
+  @apply bg-white/80 backdrop-blur-sm;
+}
+
+.glass-dark {
+  @apply bg-gray-900/80 backdrop-blur-sm;
+}
+
+/* Gradient text utilities */
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
 }
