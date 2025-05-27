@@ -52,6 +52,23 @@ export const THEME = {
     primary: 'from-blue-600 to-purple-600',
     secondary: 'from-orange-500 to-pink-500',
     subtle: 'from-gray-50 via-blue-50/30 to-purple-50/30'
+  },
+  animations: {
+    fadeIn: {
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.6 }
+    },
+    slideIn: {
+      initial: { x: -20, opacity: 0 },
+      animate: { x: 0, opacity: 1 },
+      transition: { duration: 0.4 }
+    },
+    scale: {
+      initial: { scale: 0.95, opacity: 0 },
+      animate: { scale: 1, opacity: 1 },
+      transition: { duration: 0.3 }
+    }
   }
 };
 
@@ -79,3 +96,15 @@ export const TEAM = [
     bio: 'Ensuring excellent customer service and support for all our clients.'
   }
 ];
+
+// Battery Calculator Constants
+export const BATTERY_CAPACITIES = [150, 180, 200];
+
+export const POWER_CONSUMPTION = {
+  fans: 75,
+  lights: 15,
+  tv: 120,
+  refrigerator: 150,
+  router: 20,
+  other: 100
+};

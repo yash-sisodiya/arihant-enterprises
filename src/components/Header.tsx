@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import Button from './ui/Button';
-import { CONTACT } from '../config/constants';
+import { CONTACT, THEME } from '../config/constants';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,46 +38,65 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header 
+    <motion.header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/80 backdrop-blur-sm shadow-md py-2' : 'bg-transparent py-4'
       }`}
       style={{ marginTop: '48px' }}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img 
-              src="/logo.png" 
-              alt="Arihant Enterprises" 
-              className="h-12 w-auto"
-            />
+            <motion.h1 
+              className="text-2xl font-bold"
+              initial={THEME.animations.fadeIn.initial}
+              animate={THEME.animations.fadeIn.animate}
+              transition={THEME.animations.fadeIn.transition}
+            >
+              <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Arihant</span>
+              <span className="bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">Enterprises</span>
+            </motion.h1>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link
+            {navLinks.map((link, index) => (
+              <motion.div
                 key={link.path}
-                to={link.path}
-                className={`font-medium transition-colors hover:text-blue-600 ${
-                  location.pathname === link.path ? 'text-blue-600' : 'text-gray-700'
-                }`}
+                initial={THEME.animations.slideIn.initial}
+                animate={THEME.animations.slideIn.animate}
+                transition={{ ...THEME.animations.slideIn.transition, delay: index * 0.1 }}
               >
-                {link.name}
-              </Link>
+                <Link
+                  to={link.path}
+                  className={`font-medium transition-colors hover:text-blue-600 ${
+                    location.pathname === link.path ? 'text-blue-600' : 'text-gray-700'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <Link to="/cart" className="relative">
-              <ShoppingCart className="h-6 w-6" />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {getTotalItems()}
-                </span>
-              )}
-            </Link>
+            <motion.div
+              initial={THEME.animations.scale.initial}
+              animate={THEME.animations.scale.animate}
+              transition={THEME.animations.scale.transition}
+            >
+              <Link to="/cart" className="relative">
+                <ShoppingCart className="h-6 w-6" />
+                {getTotalItems() > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {getTotalItems()}
+                  </span>
+                )}
+              </Link>
+            </motion.div>
             <Button 
               variant="gradient-primary" 
               size="sm"
@@ -113,7 +133,13 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-sm shadow-lg">
+        <motion.div 
+          className="lg:hidden bg-white/95 backdrop-blur-sm shadow-lg"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
@@ -137,9 +163,9 @@ const Header: React.FC = () => {
               </Button>
             </nav>
           </div>
-        </div>
+        </motion.div>
       )}
-    </header>
+    </motion.header>
   );
 };
 

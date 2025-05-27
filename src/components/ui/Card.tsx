@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { THEME } from '../../config/constants';
 
 interface CardProps {
   className?: string;
@@ -8,7 +10,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ className = '', children, hover = false }) => {
   return (
-    <div 
+    <motion.div 
       className={`
         bg-white/80 backdrop-blur-sm 
         border border-gradient-to-r from-blue-500/20 to-purple-500/20
@@ -16,9 +18,13 @@ const Card: React.FC<CardProps> = ({ className = '', children, hover = false }) 
         ${hover ? 'transition-all duration-300 hover:-translate-y-1 hover:shadow-xl' : ''}
         ${className}
       `}
+      initial={THEME.animations.fadeIn.initial}
+      whileInView={THEME.animations.fadeIn.animate}
+      viewport={{ once: true }}
+      transition={THEME.animations.fadeIn.transition}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
@@ -42,9 +48,15 @@ interface CardTitleProps {
 
 const CardTitle: React.FC<CardTitleProps> = ({ className = '', children }) => {
   return (
-    <h3 className={`text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent ${className}`}>
+    <motion.h3 
+      className={`text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent ${className}`}
+      initial={THEME.animations.slideIn.initial}
+      whileInView={THEME.animations.slideIn.animate}
+      viewport={{ once: true }}
+      transition={THEME.animations.slideIn.transition}
+    >
       {children}
-    </h3>
+    </motion.h3>
   );
 };
 
@@ -83,10 +95,14 @@ interface CardImageProps {
 const CardImage: React.FC<CardImageProps> = ({ src, alt, className = '' }) => {
   return (
     <div className="relative pt-[60%] overflow-hidden">
-      <img
+      <motion.img
         src={src}
         alt={alt}
         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${className}`}
+        initial={{ scale: 1.1, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       />
     </div>
   );
