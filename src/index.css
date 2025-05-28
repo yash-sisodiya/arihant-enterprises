@@ -53,18 +53,18 @@
 
 /* Glass effect utilities */
 .glass {
-  @apply bg-white/80 backdrop-blur-sm border border-gradient-to-r from-blue-500/20 to-purple-500/20;
+  @apply bg-white/80 backdrop-blur-sm border from-blue-500/20 to-purple-500/20;
 }
 
 .glass-dark {
-  @apply bg-gray-900/80 backdrop-blur-sm border border-gradient-to-r from-blue-500/20 to-purple-500/20;
+  @apply bg-gray-900/80 backdrop-blur-sm border from-blue-500/20 to-purple-500/20;
 }
 
 /* Border gradient utilities */
 .border-gradient {
-  @apply border border-gradient-to-r from-blue-500/20 to-purple-500/20;
+  @apply border from-blue-500/20 to-purple-500/20;
 }
 
 .border-gradient-hover {
-  @apply border border-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/40 hover:to-purple-500/40;
+  @apply border from-blue-500/20 to-purple-500/20 hover:from-blue-500/40 hover:to-purple-500/40;
 }
